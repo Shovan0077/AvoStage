@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Avocado Ripeness Classifier</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- responsive layout -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0fff0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            box-sizing: border-box; /* ensures no overflow */
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #228B22;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1e7a1e;
+        }
+
+        h2 {
+            text-align: center;
+            color: black;
+            margin-bottom: 25px;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: 25px;
+            color: #444;
+        }
+
+        @media (max-width: 600px) {
+            input, select, button {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="/predict" method="post">
+            <h2>AvoStage: Avocado Ripeness Classifier</h2>
+
+            <input type="number" name="firmness" step="0.01" placeholder="Firmness" required>
+            <input type="number" name="hue" step="0.01" placeholder="Hue" required>
+            <input type="number" name="saturation" step="0.01" placeholder="Saturation" required>
+            <input type="number" name="brightness" step="0.01" placeholder="Brightness" required>
+            <input type="number" name="sound_db" step="0.01" placeholder="Sound in dB" required>
+            <input type="number" name="weight" step="0.01" placeholder="Weight in g" required>
+            <input type="number" name="size" step="0.01" placeholder="Size in cm³" required>
+
+            <select name="color" required>
+                <option value="">Select Color</option>
+                <option value="dark green">Dark Green</option>
+                <option value="green">Green</option>
+                <option value="light green">Light Green</option>
+                <option value="yellowish">Yellowish</option>
+            </select>
+
+            <button type="submit">Predict Result</button>
+
+            {% if prediction %}
+                <h3>Predicted Avocado Stage: {{ prediction }}</h3>
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>
